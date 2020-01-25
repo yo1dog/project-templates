@@ -122,29 +122,16 @@ function mixedTSLint() {
     .replace('"node_modules"', '$&,\n    "app/browserFiles"')
   );
   createPackage(dir, 'for dir in . app/browserFiles; do npx tsc -p $dir/jsconfig.json; done && npx eslint .');
-  writeFile(
-    `${dir}/.base.eslintrc.json`,
-    createESlintContent(
-      'parser/tsParser',
-      'parser/jsProjectParserOptions',
-      'rules/jsRules',
-      'rules/tsRules'
-    )
-    .replace(/,\n +"sourceType": ".+?"/, '')
-    .replace(/,\n +"project": ".+?"/, '')
+  createESlint(
+    dir,
+    'parser/tsParser',
+    'parser/jsProjectParserOptions',
+    'env/nodeEnv',
+    'rules/jsRules',
+    'rules/tsRules'
   );
   createGitIgnore(dir, false);
   createNPMInstall(dir, true, true);
-  
-  writeFile(
-    `${dir}/.eslintrc.json`,
-    createESlintContent(
-      'parser/jsProjectParserOptions',
-      'env/nodeEnv'
-    )
-    .replace(/^{/, '$&\n  "extends": [".base.eslintrc.json"],')
-    .replace(/\n +"ecmaVersion": \d+,/, '')
-  );
   
   writeFile(
     `${dir}/app/browserFiles/jsconfig.json`,
@@ -159,8 +146,9 @@ function mixedTSLint() {
       'parser/jsProjectParserOptions',
       'env/browserEnv'
     )
-    .replace(/^{/, '$&\n  "extends": ["../../.base.eslintrc.json"],')
+    .replace(/^{/, '$&\n  "extends": ["../../.eslintrc.json"],')
     .replace(/\n +"ecmaVersion": \d+,/, '')
+    .replace(/\n +"sourceType": ".+?",/, '')
     .replace(/("project": ")(.+?")/, '$1app/browserFiles/$2')
   );
 }

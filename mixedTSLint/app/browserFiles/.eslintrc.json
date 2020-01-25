@@ -1,7 +1,6 @@
 {
-  "extends": ["../../.base.eslintrc.json"],
+  "extends": ["../../.eslintrc.json"],
   "parserOptions": {
-    "sourceType": "script",
     "project": "app/browserFiles/jsconfig.json"
   },
   "env": {
