@@ -1,0 +1,12 @@
+{
+  "extends": [".base.eslintrc.json"],
+  "parserOptions": {
+    "sourceType": "script",
+    "project": "jsconfig.json"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": false
+  }
+}
