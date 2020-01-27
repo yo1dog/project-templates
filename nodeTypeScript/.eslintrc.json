@@ -96,7 +96,7 @@
     "no-var": "error",
     "prefer-arrow-callback": ["error", {"allowNamedFunctions": true}],
     "prefer-const": "error",
-
+    
     // --- TypeScript ---
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/no-extraneous-class": "error",
@@ -124,11 +124,11 @@
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-require-imports": "off",
-
+    
     // --- TypeScript Project ---
     "@typescript-eslint/no-require-imports": "error"
-
+    
     // --- Project Specific ---
-
+    
   }
 }

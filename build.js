@@ -231,10 +231,10 @@ function createESlintContent(...fileIncludes) {
         .replace(/^{\n +"rules": {\n/, '')
         .replace(/\n +}\n}$/, '')
       )
-      .join(',\n\n')
+      .join(',\n    \n')
     );
     
-    content += '\n\n    // --- Project Specific ---\n\n  }';
+    content += '\n    \n    // --- Project Specific ---\n    \n  }';
   }
   content += '\n}\n';
   
