@@ -136,7 +136,7 @@ function mixedTSLint() {
   writeFile(
     `${dir}/app/browserFiles/jsconfig.json`,
     createProjectConfigContent(false, true)
-    .replace(/(^.+"compilerOptions": {).+(\n +"lib": \[.+?\])/s, '$1$2')
+    .replace(/(^.+"maxNodeModuleJsDepth": 0,).+(\n +"lib": \[.+?\])/s, '$1$2')
     .replace(/^{/, '$&\n  "extends": "../../jsconfig.json",')
     .replace(/("exclude": \[).+(\])/s, '$1$2')
   );
