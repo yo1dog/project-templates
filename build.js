@@ -1,7 +1,7 @@
 const fs       = require('fs');
 const pathUtil = require('path');
 
-const jsLintScript = 'npx tsc -p jsconfig.json && npx eslint .';
+const jsLintScript = 'npx tsc -p jsconfig.json --noEmit && npx eslint .';
 const tsLintScript = 'npx tsc -p . --noEmit && npx eslint . --ext .js,.jsx,.ts,.tsx';
 
 
