@@ -72,6 +72,7 @@
     "no-unused-vars": ["error", {"args": "none"}],
     
     // Stylistic Issues
+    "camelcase": ["error", {"properties": "never"}],
     "jsx-quotes": ["error", "prefer-double"],
     "linebreak-style": ["error", "unix"],
     "new-cap": ["error", {"capIsNewExceptions": ["SQL", "express.Router"]}],

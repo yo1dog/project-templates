@@ -77,6 +77,7 @@
     "no-unused-vars": ["error", {"args": "none"}],
     
     // Stylistic Issues
+    "camelcase": ["error", {"properties": "never"}],
     "jsx-quotes": ["error", "prefer-double"],
     "linebreak-style": ["error", "unix"],
     "new-cap": ["error", {"capIsNewExceptions": ["SQL", "express.Router"]}],
@@ -126,6 +127,20 @@
     "@typescript-eslint/no-require-imports": "off",
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "error",
+    "camelcase": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "default",
+        "format": ["camelCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "property",
+        "format": null
+      }
+    ],
     
     // --- TypeScript Project ---
     "@typescript-eslint/no-require-imports": "error"
