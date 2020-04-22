@@ -1,1 +1,1 @@
-npm install '@types/node@^12' '@typescript-eslint/eslint-plugin' '@typescript-eslint/parser' 'typescript' 'eslint' --save-dev
+npm install '@types/node' '@typescript-eslint/eslint-plugin' '@typescript-eslint/parser' 'typescript' 'eslint' --save-dev

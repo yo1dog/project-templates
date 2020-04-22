@@ -264,7 +264,7 @@ function createGitIgnore(dir, isTSProject = false) {
 function createNPMInstall(dir, isNode, isTSLint) {
   const packages = [];
   if (isNode) {
-    packages.push('@types/node@^12');
+    packages.push('@types/node');
   }
   if (isTSLint) {
     packages.push('@typescript-eslint/eslint-plugin');
