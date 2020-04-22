@@ -2,7 +2,7 @@
   "extends": "../../jsconfig.json",
   "compilerOptions": {
     "maxNodeModuleJsDepth": 0,
-    "lib": ["es2020", "dom"]
+    "lib": ["esnext"]
   },
   "exclude": []
 }
