@@ -77,6 +77,7 @@ function browser() {
     'env/browserEnv',
     'rules/jsRules'
   );
+  createNVM(dir);
   createGitIgnore(dir, false);
   createNPMInstall(dir, false, false);
 }
@@ -93,6 +94,7 @@ function browserTSLint() {
     'rules/jsRules',
     'rules/tsRules'
   );
+  createNVM(dir);
   createGitIgnore(dir, false);
   createNPMInstall(dir, false, true);
 }
@@ -110,6 +112,7 @@ function browserTypeScript() {
     'rules/tsRules',
     'rules/tsProjectRules'
   );
+  createNVM(dir);
   createGitIgnore(dir, true);
   createNPMInstall(dir, false, true);
 }
