@@ -176,7 +176,7 @@ function createProjectConfigContent(isTSProject = false, includeDOM = false) {
   
   if (includeDOM) {
     content = content.replace(
-      /("lib": \["es2020")(\])/i,
+      /("lib": \[.+?)(\])/i,
       `$1, "${isTSProject? 'DOM' : 'dom'}"$2`
     );
   }
