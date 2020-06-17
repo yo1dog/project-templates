@@ -36,13 +36,38 @@
     "@typescript-eslint/naming-convention": [
       "error",
       {
-        "selector": "default",
-        "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+        "selector": "variableLike",
+        "format": ["camelCase"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "variable",
+        "format": ["camelCase", "UPPER_CASE"],
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "memberLike",
+        "format": ["camelCase"],
         "leadingUnderscore": "allow"
       },
       {
         "selector": "property",
-        "format": null
+        "format": null,
+        "leadingUnderscore": "allow"
+      },
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "interface",
+        "prefix": ["I"],
+        "format": ["PascalCase"]
+      },
+      {
+        "selector": "enum",
+        "prefix": ["E"],
+        "format": ["PascalCase"]
       }
     ]
   }
