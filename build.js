@@ -17,7 +17,7 @@ const tsLintScript = 'npx tsc -p . --noEmit && npx eslint . --ext .js,.jsx,.ts,.
 
 function node() {
   const dir = 'node';
-  createProjectConfig(dir, false, false);
+  createProjectConfig(dir, true, false);
   createPackage(dir, jsLintScript);
   createESlint(
     dir,
@@ -33,7 +33,7 @@ function node() {
 
 function nodeTSLint() {
   const dir = 'nodeTSLint';
-  createProjectConfig(dir, false, false);
+  createProjectConfig(dir, true, false);
   createPackage(dir, jsLintScript);
   createESlint(
     dir,
@@ -50,7 +50,7 @@ function nodeTSLint() {
 
 function nodeTypeScript() {
   const dir = 'nodeTypeScript';
-  createProjectConfig(dir, true, false);
+  createProjectConfig(dir, true, true);
   createPackage(dir, tsLintScript);
   createESlint(
     dir,
@@ -68,7 +68,7 @@ function nodeTypeScript() {
 
 function browser() {
   const dir = 'browser';
-  createProjectConfig(dir, false, true);
+  createProjectConfig(dir, false, false);
   createPackage(dir, jsLintScript);
   createESlint(
     dir,
@@ -84,7 +84,7 @@ function browser() {
 
 function browserTSLint() {
   const dir = 'browserTSLint';
-  createProjectConfig(dir, false, true);
+  createProjectConfig(dir, false, false);
   createPackage(dir, jsLintScript);
   createESlint(
     dir,
@@ -101,7 +101,7 @@ function browserTSLint() {
 
 function browserTypeScript() {
   const dir = 'browserTypeScript';
-  createProjectConfig(dir, true, true);
+  createProjectConfig(dir, false, true);
   createPackage(dir, tsLintScript);
   createESlint(
     dir,
@@ -119,9 +119,8 @@ function browserTypeScript() {
 
 function mixedTSLint() {
   const dir = 'mixedTSLint';
-  writeFile(
-    `${dir}/jsconfig.json`,
-    createProjectConfigContent(false, false)
+  let path = createProjectConfig(dir, true, false);
+  writeFile(path, readFile(path)
     .replace('"node_modules"', '$&,\n    "app/browserFiles"')
   );
   createPackage(dir, 'for dir in . app/browserFiles; do npx tsc -p $dir/jsconfig.json; done && npx eslint .');
@@ -136,13 +135,16 @@ function mixedTSLint() {
   createGitIgnore(dir, false);
   createNPMInstall(dir, true, true);
   
-  writeFile(
-    `${dir}/app/browserFiles/jsconfig.json`,
-    createProjectConfigContent(false, true)
-    .replace(/(^.+"maxNodeModuleJsDepth": 0,).+(\n +"lib": \[.+?\])/s, '$1$2')
-    .replace(/^{/, '$&\n  "extends": "../../jsconfig.json",')
-    .replace(/("exclude": \[).+(\])/s, '$1$2')
-  );
+  path = createProjectConfig(`${dir}/app/browserFiles`, false, false);
+  
+  writeFile(path, `{
+  "extends": "../../jsconfig.json",
+  "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "maxNodeModuleJsDepth": 0
+  },
+  "exclude": []
+}`);
   writeFile(
     `${dir}/app/browserFiles/.eslintrc.json`,
     createESlintContent(
@@ -159,29 +161,13 @@ function mixedTSLint() {
 
 /**
  * @param {string} dir 
+ * @param {boolean} isNode 
  * @param {boolean} isTSProject 
- * @param {boolean} includeDOM 
  */
-function createProjectConfig(dir, isTSProject = false, includeDOM = false) {
-  const filename = `${isTSProject? 'ts' : 'js'}config.json`;
-  writeFile(`${dir}/${filename}`, createProjectConfigContent(isTSProject, includeDOM));
-}
-/**
- * @param {boolean} isTSProject 
- * @param {boolean} includeDOM 
- */
-function createProjectConfigContent(isTSProject = false, includeDOM = false) {
-  const filename = `${isTSProject? 'ts' : 'js'}config.json`;
-  let content = readFile(`src/projectConfig/${filename}`);
-  
-  if (includeDOM) {
-    content = content.replace(
-      /("lib": \[.+?)(\])/i,
-      `$1, "${isTSProject? 'DOM' : 'dom'}"$2`
-    );
-  }
-  
-  return content;
+function createProjectConfig(dir, isNode, isTSProject) {
+  const prefix = `${isTSProject? 'ts' : 'js'}config`;
+  const suffix = isNode? 'node' : 'browser';
+  return copyFile(`src/projectConfig/${prefix}.${suffix}.json`, `${dir}/${prefix}.json`);
 }
 
 /**
@@ -290,10 +276,11 @@ function createNPMInstall(dir, isNode, isTSLint) {
  * @param {string} dest 
  */
 function copyFile(src, dest) {
-  return fs.copyFileSync(
+  fs.copyFileSync(
     pathUtil.join(__dirname, ...src.split('/')),
     pathUtil.join(__dirname, ...dest.split('/'))
   );
+  return dest;
 }
 
 /**

@@ -1,15 +1,14 @@
 {
   "compilerOptions": {
-    "maxNodeModuleJsDepth": 0,
-    "checkJs": true,
-    "alwaysStrict": true,
-    "strict": true,
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
+    "lib": ["es2020","dom"],
     "module": "esnext",
-    "target": "esnext",
-    "lib": ["esnext", "dom"]
+    "target": "es2020",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "maxNodeModuleJsDepth": 0,
+    "moduleResolution": "Node",
+    "checkJs": true
   },
   "exclude": [
     "node_modules"

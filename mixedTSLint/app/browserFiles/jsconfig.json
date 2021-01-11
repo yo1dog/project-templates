@@ -1,8 +1,8 @@
 {
   "extends": "../../jsconfig.json",
   "compilerOptions": {
-    "maxNodeModuleJsDepth": 0,
-    "lib": ["esnext", "dom"]
+    "lib": ["esnext", "dom"],
+    "maxNodeModuleJsDepth": 0
   },
   "exclude": []
 }
